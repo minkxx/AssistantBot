@@ -5,3 +5,6 @@ pyenv/
 # Ignoring extensions
 *.session
 *.session-journal
+
+# Ignoring custom files
+note.txt
