@@ -1,0 +1,7 @@
+# Ignoring files
+__pycache__/
+pyenv/
+
+# Ignoring extensions
+*.session
+*.session-journal
