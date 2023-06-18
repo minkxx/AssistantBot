@@ -1,3 +1,4 @@
+import importlib
 import asyncio
 from pyrogram import idle
 from assistant import (
