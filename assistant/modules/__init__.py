@@ -19,7 +19,7 @@ def __list_all_modules():
     return all_modules
 
 
-print("[INFO]: IMPORTING MODULES")
+print("IMPORTING MODULES")
 importlib.import_module("assistant.modules.__main__")
 ALL_MODULES = sorted(__list_all_modules())
 __all__ = ALL_MODULES + ["ALL_MODULES"]
