@@ -32,6 +32,7 @@ async def start_bot():
     print(f"BOT STARTED AS {BOT_NAME}!")
     print("Sending online status!")
     await asstb.send_message(LOG_GROUP, "Bot started!")
+    print("Sent!")
     await idle()
 
 if __name__ == "__main__":

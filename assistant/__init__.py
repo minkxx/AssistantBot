@@ -1,8 +1,13 @@
 import sys
+import time
+import asyncio
 import pyroaddon
 from pyrogram import Client
+from pyrogram.errors import PeerIdInvalid
 
-from config import (API_ID, API_HASH, BOT_TOKEN)
+from config import (API_ID, API_HASH, BOT_TOKEN, OWNER_ID)
+
+StartTime = time.time()
 
 # if version < 3.6, stop bot.
 if sys.version_info[0] < 3 or sys.version_info[1] < 7:
@@ -21,3 +26,15 @@ x = asstb.get_me()
 BOT_ID = x.id
 BOT_NAME = x.first_name + (x.last_name or "")
 BOT_USERNAME = x.username
+
+
+print("Retriving owner info.")
+get_user = OWNER_ID
+try:
+    owner = asstb.get_users(get_user)
+except PeerIdInvalid:
+    print("Unable to retrive OWNER_ID")
+
+    
+OWNER_NAME = owner.first_name
+OWNER_USERNAME = owner.username
