@@ -7,4 +7,5 @@ pyenv/
 *.session-journal
 
 # Ignoring custom files
+config.py
 note.txt

@@ -1,3 +1,4 @@
+import os
 import sys
 import time
 import asyncio
@@ -5,10 +6,13 @@ import pyroaddon
 from pyrogram import Client
 from pyrogram.errors import PeerIdInvalid
 
-from config import (API_ID, API_HASH, BOT_TOKEN, OWNER_ID)
-
 StartTime = time.time()
 asst_version = "0.0.1"
+
+if os.path.exists("config.py"):
+    from config import *
+else:
+    from sampleconfig import *
 
 # if version < 3.6, stop bot.
 if sys.version_info[0] < 3 or sys.version_info[1] < 8:
