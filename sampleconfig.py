@@ -1,11 +1,14 @@
 import os
 
-API_ID = 5027948
+# Your app id and app hash from my.telegram.org
+API_ID = 1
+API_HASH = ""
 
-API_HASH = "6517f60edf34e60448730a46f1d2e9d9"
+# Your bot token from t.me/BotFather
+BOT_TOKEN = ""
 
-BOT_TOKEN = "2042784667:AAFpu8vzCQftto2HBIP2HT8ETcZVQtPMtCE"
+# Get your id from t.me/MissRose_bot /id
+OWNER_ID = 1
 
-OWNER_ID = 1685032280
-
-LOG_GROUP = -1001835346543
+# Add t.me/MissRose_bot to your log group and type /id to get groupid
+LOG_GROUP = 1
