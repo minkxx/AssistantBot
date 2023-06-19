@@ -35,9 +35,11 @@ BOT_USERNAME = x.username
 
 print("Retriving owner info.")
 get_user = OWNER_ID
+OWNER_NAME = None
+OWNER_USERNAME = None
 try:
     owner = asstb.get_users(get_user)
+    OWNER_NAME = owner.first_name
+    OWNER_USERNAME = owner.username
 except PeerIdInvalid:
-    print("Unable to retrive OWNER_ID")   
-OWNER_NAME = owner.first_name
-OWNER_USERNAME = owner.username
+    print("Unable to retrive OWNER_ID")
