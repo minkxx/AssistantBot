@@ -1,7 +1,10 @@
+import os
 from pyrogram import filters
-from assistant import (asstb)
 from pyrogram.errors import PeerIdInvalid
 from pyrogram.types import Message
+
+from assistant import (asstb)
+# from assistant.funcs.helpers import get_pfp
 
 @asstb.on_message(filters.command("whois"))
 async def who_is(c : asstb, m : Message):
@@ -24,11 +27,26 @@ async def who_is(c : asstb, m : Message):
         user = await c.get_users(get_user)
     except PeerIdInvalid:
         await c.send_message(
-                chat_id = m.chat.id,
-                text = "Given user's id is invalid.",
-                reply_to_message_id = m.id
+            chat_id = m.chat.id,
+            text = "Given user's id is invalid.",
+            reply_to_message_id = m.id
             )
         return
+
+    try:
+        pfp = c.get_chat_photos(user.id)
+        pfp_list = []
+        async for photo in pfp:
+            pfp_list.append(photo)
+        dll = (pfp_list[0].file_id)
+        x = await c.download_media(
+            message = dll,
+            file_name = f"{user.id}_pfp.png",
+        )
+    except IndexError:
+        x = None
+        pfp = None
+
     full_name = user.first_name + (user.last_name or "")
     user_id = user.id
     username = user.username
@@ -41,7 +59,7 @@ async def who_is(c : asstb, m : Message):
 
     whois_msg = f'''**[{full_name}](tg://user?id={user_id})**
 • User id : `{user_id}`
-• Username : `@{username}`
+• Username : @{username}
 • DC : `{dc_id}`
 • Status : `{status}`
 • Is scam : `{scam}`
@@ -49,13 +67,24 @@ async def who_is(c : asstb, m : Message):
 • Is verified : `{verification}`
 • Is contact : `{contact}`
 '''
-
-    await c.send_message(
-        chat_id = m.chat.id,
-        text = whois_msg,
-        reply_to_message_id = m.id,
-        disable_web_page_preview = True,
-    )
+    if not pfp:
+        await c.send_message(
+            chat_id = m.chat.id,
+            text = whois_msg,
+            reply_to_message_id = m.id,
+            disable_web_page_preview = True,
+        )
+    else:
+        await c.send_photo(
+            chat_id = m.chat.id,
+            photo = x,
+            caption = whois_msg,
+            reply_to_message_id = m.id,
+        )
+    if x:
+        os.remove(x)
+    else:
+        pass
 
 @asstb.on_message(filters.command("id"))
 async def who_is(c : asstb, m : Message):
