@@ -7,7 +7,7 @@ from assistant import (
     asstb,
     LOG_GROUP,
 )
-
+from assistant.modules import ALL_MODULES
 
 
 loop = asyncio.get_event_loop()
