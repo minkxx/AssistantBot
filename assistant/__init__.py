@@ -8,6 +8,7 @@ from pyrogram.errors import PeerIdInvalid
 from config import (API_ID, API_HASH, BOT_TOKEN, OWNER_ID)
 
 StartTime = time.time()
+asst_version = "0.0.1"
 
 # if version < 3.6, stop bot.
 if sys.version_info[0] < 3 or sys.version_info[1] < 8:
