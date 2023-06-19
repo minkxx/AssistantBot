@@ -4,7 +4,6 @@ from pyrogram.errors import PeerIdInvalid
 from pyrogram.types import Message
 
 from assistant import (asstb)
-# from assistant.funcs.helpers import get_pfp
 
 @asstb.on_message(filters.command("whois"))
 async def who_is(c : asstb, m : Message):
