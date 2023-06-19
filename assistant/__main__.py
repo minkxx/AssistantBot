@@ -5,9 +5,10 @@ from assistant import (
     BOT_NAME,
     BOT_USERNAME,
     asstb,
+    LOG_GROUP,
 )
-from assistant.modules import ALL_MODULES
-from config import LOG_GROUP
+
+
 
 loop = asyncio.get_event_loop()
 
