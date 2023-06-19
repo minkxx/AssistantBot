@@ -8,4 +8,5 @@ pyenv/
 
 # Ignoring custom files
 config.py
+test.py
 note.txt
