@@ -7,7 +7,5 @@ PySocks==1.7.1
 smmap==5.0.0
 TgCrypto==1.2.5
 Flask==2.2.2
-
 gunicorn==20.1.0
-
 aiohttp==3.8.1
