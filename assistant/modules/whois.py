@@ -15,14 +15,14 @@ async def whois_cmd(c : asstb, m : Message):
         get_user = m.reply_to_message.from_user.id
     elif len(cmd) > 1:
         get_user = cmd[1]
-        try:
-            get_user = int(cmd[1])
-        except ValueError:
-            await c.send_message(
-                chat_id = m.chat.id,
-                text = "Please provide a valid id and not a text",
-                reply_to_message_id = m.id
-            )
+        # try:
+        #     get_user = int(cmd[1])
+        # except ValueError:
+        #     await c.send_message(
+        #         chat_id = m.chat.id,
+        #         text = "Please provide a valid id and not a text",
+        #         reply_to_message_id = m.id
+        #     )
     try:
         user = await c.get_users(get_user)
     except PeerIdInvalid:
