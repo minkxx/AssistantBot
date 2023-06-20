@@ -27,7 +27,7 @@ async def help_cmd(c : asstb, m : Message):
     else:
         main_text = f"Hey {m.chat.first_name}, I,m a simple assistant bot more like a No-PM's bot.\nCheck buttons for help or you can seek help in Support Group\n\nGeneral commands:\n/start - starts bot\n/help - this help menu"
         main_keyboard = ikb([
-            [("Alive", "alive_callback"), ("Whois", "whois_callback")]
+            [("Alive", "alive_callback"), ("Session Gen", "session_callback"), ("Whois", "whois_callback")]
         ])
         await c.send_message(
             chat_id = m.chat.id,
@@ -57,6 +57,17 @@ To fetch given user info:
 
 To fetch user id or chat id:
 /id `<user or chat username> or reply to target user`
+'''
+        keyboard = ikb([
+            [("Back", "back_callback")]
+        ])
+        await qb.edit_message_text(text, reply_markup=keyboard)
+
+    elif qb.data == "session_callback":
+        text = f'''**SessionGen Command**
+
+To fetch given user info:
+/ssgen - `generates a pyrogram user session`
 '''
         keyboard = ikb([
             [("Back", "back_callback")]
