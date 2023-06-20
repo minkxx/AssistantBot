@@ -6,7 +6,8 @@ from pyrogram.types import Message
 from assistant import (asstb)
 
 @asstb.on_message(filters.command("whois"))
-async def who_is(c : asstb, m : Message):
+async def whois_cmd(c : asstb, m : Message):
+    protext = await m.reply("__Processing...__")
     cmd = m.command
     if not m.reply_to_message and len(cmd) == 1:
         get_user = m.from_user.id
@@ -53,20 +54,21 @@ async def who_is(c : asstb, m : Message):
     status = user.status or "None"
     bot = user.is_bot
     verification = user.is_verified
-    contact = user.is_contact
     scam = user.is_scam
+    premium = user.is_premium
 
     whois_msg = f'''**[{full_name}](tg://user?id={user_id})**
 • User id : `{user_id}`
 • Username : @{username}
 • DC : `{dc_id}`
 • Status : `{status}`
-• Is scam : `{scam}`
-• Is bot : `{bot}`
-• Is verified : `{verification}`
-• Is contact : `{contact}`
+• Scam : `{scam}`
+• Bot : `{bot}`
+• Premium : `{premium}`
+• Verified : `{verification}`
 '''
     if not pfp:
+        await protext.delete()
         await c.send_message(
             chat_id = m.chat.id,
             text = whois_msg,
@@ -74,6 +76,7 @@ async def who_is(c : asstb, m : Message):
             disable_web_page_preview = True,
         )
     else:
+        await protext.delete()
         await c.send_photo(
             chat_id = m.chat.id,
             photo = x,
@@ -86,7 +89,7 @@ async def who_is(c : asstb, m : Message):
         pass
 
 @asstb.on_message(filters.command("id"))
-async def who_is(c : asstb, m : Message):
+async def id_cmd(c : asstb, m : Message):
     cmd = m.command
     if not m.reply_to_message and len(cmd) == 1:
         get_user = m.from_user.id
@@ -108,6 +111,6 @@ async def who_is(c : asstb, m : Message):
 
     await c.send_message(
         chat_id = m.chat.id,
-        text = f"User id : `{user_id}`\nChat id : {m.chat.id}",
+        text = f"User id : `{user_id}`\nChat id : `{m.chat.id}`",
         reply_to_message_id = m.id
     )
