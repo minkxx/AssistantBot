@@ -4,6 +4,7 @@ from pyrogram import idle
 from assistant import (
     BOT_NAME,
     BOT_USERNAME,
+    OWNER_NAME,
     asstb,
     LOG_GROUP,
 )
@@ -30,7 +31,7 @@ async def start_bot():
     print("Loading modules for ASSISTANT BOT")
     print(bot_modules)
     print("+===============+===============+===============+===============+")
-    print(f"BOT STARTED AS {BOT_NAME}!")
+    print(f"BOT STARTED AS {BOT_NAME} for {OWNER_NAME}")
     print("Sending online status!")
     await asstb.send_message(LOG_GROUP, "Bot started!")
     print("Sent!")
