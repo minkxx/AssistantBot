@@ -13,7 +13,7 @@ from assistant.funcs.helpers import get_readable_time
 
 @asstb.on_message(filters.command("alive"))
 async def alive_cmd(client : asstb, message : Message):
-    img_ = "https://graph.org/file/39c9ff82c41eeed2c0ae1.mp4"
+    img_ = "https://graph.org/file/6d37af28a21b094079ff5.jpg"
     my_system = platform.uname()
     python_version = f"{version_info[0]}.{version_info[1]}.{version_info[2]}"   
     uptime = get_readable_time((time.time() - StartTime))
@@ -27,9 +27,9 @@ async def alive_cmd(client : asstb, message : Message):
 • System : `{my_system.system}`
 • Uptime : `{uptime}`'''
 
-    await client.send_video(
+    await client.send_photo(
         chat_id = message.chat.id,
-        video = img_,
+        photo = img_,
         caption=alive_text,)
 
 @asstb.on_message(filters.command("ping"))

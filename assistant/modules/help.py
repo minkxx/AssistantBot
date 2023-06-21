@@ -65,8 +65,7 @@ To fetch user id or chat id:
 
     elif qb.data == "session_callback":
         text = f'''**SessionGen Command**
-
-To fetch given user info:
+        
 /ssgen - `generates a pyrogram user session`
 '''
         keyboard = ikb([
