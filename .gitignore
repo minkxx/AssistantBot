@@ -10,4 +10,5 @@ downloads/
 # Ignoring custom files
 config.py
 test.py
+test2.py
 note.txt
