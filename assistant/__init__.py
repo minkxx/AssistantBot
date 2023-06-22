@@ -7,7 +7,7 @@ from pyrogram import Client
 from pyrogram.errors import PeerIdInvalid
 
 StartTime = time.time()
-asst_version = "0.2.2"
+asst_version = "0.5.2"
 
 if os.path.exists("config.py"):
     from config import *
@@ -43,3 +43,8 @@ try:
     OWNER_USERNAME = owner.username
 except PeerIdInvalid:
     print("Unable to retrive OWNER_ID")
+
+# Some vars
+SUPPORT_CHAT = 1
+MUST_JOIN_CHANNEL = -1001800595118
+MUST_JOIN_CHANNEL_USERNAME = "MinkxxSays"
