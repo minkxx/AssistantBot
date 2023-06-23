@@ -27,8 +27,8 @@ async def help_cmd(c : asstb, m : Message):
     else:
         main_text = f"Hey {m.chat.first_name}, I,m a simple assistant bot more like a No-PM's bot.\nCheck buttons for help or you can seek help in Support Group\n\nGeneral commands:\n/start - starts bot\n/help - this help menu"
         main_keyboard = ikb([
-            [("Alive", "alive_callback"), ("PM Bot", "pmbot_callback"), ("Session Gen", "session_callback")],
-            [("Whois", "whois_callback")],
+            [("Admin", "admin_callback"), ("Alive", "alive_callback"), ("PM Bot", "pmbot_callback")],
+            [("Session Gen", "session_callback"), ("Whois", "whois_callback")],
             
         ])
         await c.send_message(
@@ -55,10 +55,10 @@ async def chat_query(c : asstb, qb : CallbackQuery):
         text = f'''**Whois Command**
 
 To fetch given user info:
-/whois `<id> or reply to target user`
+/whois (id or username) or reply to target user
 
 To fetch user id or chat id:
-/id `<user or chat username> or reply to target user`
+/id (user or chat username) or reply to target user
 '''
         keyboard = ikb([
             [("Back", "back_callback")]
@@ -87,6 +87,17 @@ To fetch user id or chat id:
         ])
         await qb.edit_message_text(text, reply_markup=keyboard)
 
+    elif qb.data == "admin_callback":
+        text = f'''**Admin Command**
+
+Promotes a user:
+/promote (id or username) or reply to user
+
+'''
+        keyboard = ikb([
+            [("Back", "back_callback")]
+        ])
+        await qb.edit_message_text(text, reply_markup=keyboard)
 
     elif qb.data == "back_callback":
         await qb.edit_message_text(main_text, reply_markup=main_keyboard)
