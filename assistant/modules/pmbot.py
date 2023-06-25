@@ -40,9 +40,10 @@ async def pmbot(c : asstb, m : Message):
                 text = m.text,
                 reply_to_message_id = sender_msg_id,
             )
-        else:
-            await c.send_message(
-                chat_id = m.chat.id,
-                text = "**Reply to a user message instead!**",
-                reply_to_message_id = m.id,
-            )
+    # To fix sessiongen module
+        # else:
+        #     await c.send_message(
+        #         chat_id = m.chat.id,
+        #         text = "**Reply to a user message instead!**",
+        #         reply_to_message_id = m.id,
+        #     )
