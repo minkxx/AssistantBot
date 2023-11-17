@@ -26,6 +26,13 @@ asstb = Client(
     bot_token=BOT_TOKEN,
     )
 
+memebot = Client(
+    name = "memebot",
+    api_id=API_ID,
+    api_hash=API_HASH,
+    bot_token=MEME_BOT_TOKEN,
+)
+
 asstb.start()
 x = asstb.get_me()
 BOT_ID = x.id
