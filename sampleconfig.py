@@ -14,4 +14,4 @@ OWNER_ID = int(os.environ.get("OWNER_ID", 1))
 LOG_GROUP = int(os.environ.get("LOG_GROUP", 1))
 
 # for my personal use
-MINKXX_BOT_TOKEN = os.environ.get("BOT_TOKEN", None)
+MEME_BOT_TOKEN = os.environ.get("BOT_TOKEN", None)
