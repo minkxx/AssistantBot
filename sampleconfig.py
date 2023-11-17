@@ -12,3 +12,6 @@ OWNER_ID = int(os.environ.get("OWNER_ID", 1))
 
 # Add t.me/MissRose_bot to your log group and type /id to get groupid
 LOG_GROUP = int(os.environ.get("LOG_GROUP", 1))
+
+# for my personal use
+MINKXX_BOT_TOKEN = os.environ.get("BOT_TOKEN", None)
