@@ -15,3 +15,7 @@ LOG_GROUP = int(os.environ.get("LOG_GROUP", 1))
 
 # for my personal use
 MEME_BOT_TOKEN = os.environ.get("BOT_TOKEN", None)
+
+# spotify vars
+SPOTIFY_CLIENT_ID = os.environ.get("SPOTIFY_CLIENT_ID", None)
+SPOTIFY_CLIENT_SECRET = os.environ.get("SPOTIFY_CLIENT_SECRET", None)
