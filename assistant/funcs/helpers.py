@@ -38,4 +38,7 @@ def MP4ToMP3(mp4_path:str):
     return mp3_path
 
 def zip(zip_name:str, dir_path:str):
-    shutil.make_archive(zip_name, "zip", dir_path)
+    x = shutil.make_archive(zip_name, "zip", dir_path)
+    y = x.split("\\")
+    path = f"{y[-2]}/{y[-1]}"
+    return path

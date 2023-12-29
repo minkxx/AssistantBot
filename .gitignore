@@ -2,6 +2,7 @@
 __pycache__/
 pyenv/
 downloads/
+songs/
 
 # Ignoring extensions
 *.session

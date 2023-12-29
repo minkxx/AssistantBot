@@ -1,3 +1,4 @@
+import os
 from pyrogram import filters
 from pyrogram.types import Message
 from assistant import asstb, SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET
@@ -27,19 +28,32 @@ async def spotify_downloader(client : asstb, message : Message):
             chat_id = message.chat.id,
             audio = send_path,
         )
+        os.remove(send_path)
     elif ("album" in (url.split("/"))) and (sClient.validUrl(url)):
         albumName, albumSongs = sClient.getAlbum(url)
         dir_path =  f"songs/{albumName}/"
         for i in albumSongs:
             path = songDl(i, dir_path)
             MP4ToMP3(path)
-        zip(albumName, dir_path)
+        send_path = zip(albumName, dir_path)
+        await client.send_document(
+            chat_id = message.chat.id,
+            document = send_path,
+        )
+        os.remove(dir_path)
+        os.remove(send_path)
     elif ("playlist" in (url.split("/")))and (sClient.validUrl(url)):
         playlistName, playlistSongs = sClient.getPlaylist(url)
         dir_path =  f"songs/{playlistName}/"
         for j in playlistSongs:
             path = songDl(j, dir_path)
             MP4ToMP3(path)
-        zip(playlistName, dir_path)
+        send_path = zip(playlistName, dir_path)
+        await client.send_document(
+            chat_id = message.chat.id,
+            document = send_path,
+        )
+        os.remove(dir_path)
+        os.remove(send_path)
     else:
         print("Not a spotify link!")
