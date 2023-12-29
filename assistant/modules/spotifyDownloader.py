@@ -22,7 +22,13 @@ async def spotify_downloader(client : asstb, message : Message):
 
     if ("track" in (url.split("/"))) and (sClient.validUrl(url)):
         songName = sClient.getTrack(url)
+        y = await client.send_message(
+            chat_id = message.chat.id,
+            text = f"Downloading {songName} ...",
+            reply_to_message_id = message.id
+        )
         path = songDl(songName, "songs/")
+        y.edit("Converting to mp3...")
         send_path = MP4ToMP3(path)
         await client.send_audio(
             chat_id = message.chat.id,
@@ -33,7 +39,13 @@ async def spotify_downloader(client : asstb, message : Message):
         albumName, albumSongs = sClient.getAlbum(url)
         dir_path =  f"songs/{albumName}/"
         for i in albumSongs:
+            y = await client.send_message(
+            chat_id = message.chat.id,
+            text = f"Downloading {i} ...",
+            reply_to_message_id = message.id
+            )
             path = songDl(i, dir_path)
+            y.edit("Converting to mp3...")
             MP4ToMP3(path)
         send_path = zip(albumName, dir_path)
         await client.send_document(
@@ -46,7 +58,13 @@ async def spotify_downloader(client : asstb, message : Message):
         playlistName, playlistSongs = sClient.getPlaylist(url)
         dir_path =  f"songs/{playlistName}/"
         for j in playlistSongs:
+            y = await client.send_message(
+            chat_id = message.chat.id,
+            text = f"Downloading {j} ...",
+            reply_to_message_id = message.id
+            )
             path = songDl(j, dir_path)
+            y.edit("Converting to mp3...")
             MP4ToMP3(path)
         send_path = zip(playlistName, dir_path)
         await client.send_document(
@@ -56,4 +74,11 @@ async def spotify_downloader(client : asstb, message : Message):
         os.remove(dir_path)
         os.remove(send_path)
     else:
-        print("Not a spotify link!")
+        await client.send_message(
+            chat_id = message.chat.id,
+            text = "Send me a valid spotify link.",
+            reply_to_message_id = message.id)
+
+@asstb.on_message(filters.command("spotify_dls_clear"))
+async def spotify_downloader(client : asstb, message : Message):
+    os.remove("songs/")

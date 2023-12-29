@@ -28,7 +28,7 @@ async def help_cmd(c : asstb, m : Message):
         main_text = f"Hey {m.chat.first_name}, I,m a simple assistant bot more like a No-PM's bot.\nCheck buttons for help or you can seek help in Support Group\n\nGeneral commands:\n/start - starts bot\n/help - this help menu"
         main_keyboard = ikb([
             [("Admin", "admin_callback"), ("Alive", "alive_callback"), ("PM Bot", "pmbot_callback")],
-            [("Session Gen", "session_callback"), ("Whois", "whois_callback")],
+            [("Session Gen", "session_callback"), ("Spotify Downloader", "spotify_callback"),("Whois", "whois_callback")],
             
         ])
         await c.send_message(
@@ -93,6 +93,16 @@ To fetch user id or chat id:
 Promotes a user:
 /promote (id or username) or reply to user
 
+'''
+        keyboard = ikb([
+            [("Back", "back_callback")]
+        ])
+        await qb.edit_message_text(text, reply_markup=keyboard)
+
+    elif qb.data == "spotify_callback":
+        text = f'''**Spotify Downloader Command**
+        
+/spotify (url) - `downloads spotify tracks/playlists/albums`
 '''
         keyboard = ikb([
             [("Back", "back_callback")]
