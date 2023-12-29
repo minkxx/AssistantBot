@@ -97,5 +97,5 @@ async def spotify_downloader(client : asstb, message : Message):
 @asstb.on_message(filters.command("spotify_dls_clear"))
 async def spotify_downloader(client : asstb, message : Message):
     z = await client.send_message(message.chat.id, "Clearing downloads...")
-    os.remove
+    os.remove()
     await z.delete()
