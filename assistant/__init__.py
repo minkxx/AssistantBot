@@ -7,7 +7,7 @@ from pyrogram import Client
 from pyrogram.errors import PeerIdInvalid
 
 StartTime = time.time()
-asst_version = "0.5.2"
+asst_version = "0.5.3"
 
 if os.path.exists("config.py"):
     from config import *
