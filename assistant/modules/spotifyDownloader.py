@@ -28,8 +28,9 @@ async def spotify_downloader(client : asstb, message : Message):
             reply_to_message_id = message.id
         )
         path = songDl(songName, "songs/")
-        y.edit("Converting to mp3...")
+        await y.edit_text("Converting to mp3...")
         send_path = MP4ToMP3(path)
+        await y.delete()
         await client.send_audio(
             chat_id = message.chat.id,
             audio = send_path,
@@ -45,13 +46,20 @@ async def spotify_downloader(client : asstb, message : Message):
             reply_to_message_id = message.id
             )
             path = songDl(i, dir_path)
-            y.edit("Converting to mp3...")
+            await y.edit_text("Converting to mp3...")
             MP4ToMP3(path)
+            await y.delete()
         send_path = zip(albumName, dir_path)
+        z = await client.send_message(
+            chat_id = message.chat.id,
+            text = f"Sending zip file...",
+            reply_to_message_id = message.id
+            )
         await client.send_document(
             chat_id = message.chat.id,
             document = send_path,
         )
+        await z.delete()
         os.remove(dir_path)
         os.remove(send_path)
     elif ("playlist" in (url.split("/")))and (sClient.validUrl(url)):
@@ -64,13 +72,20 @@ async def spotify_downloader(client : asstb, message : Message):
             reply_to_message_id = message.id
             )
             path = songDl(j, dir_path)
-            y.edit("Converting to mp3...")
+            await y.edit_text("Converting to mp3...")
             MP4ToMP3(path)
+            await y.delete()
         send_path = zip(playlistName, dir_path)
+        z = await client.send_message(
+            chat_id = message.chat.id,
+            text = f"Sending zip file...",
+            reply_to_message_id = message.id
+            )
         await client.send_document(
             chat_id = message.chat.id,
             document = send_path,
         )
+        await z.delete()
         os.remove(dir_path)
         os.remove(send_path)
     else:
@@ -81,4 +96,6 @@ async def spotify_downloader(client : asstb, message : Message):
 
 @asstb.on_message(filters.command("spotify_dls_clear"))
 async def spotify_downloader(client : asstb, message : Message):
-    os.remove("songs/")
+    z = await client.send_message(message.chat.id, "Clearing downloads...")
+    os.remove
+    await z.delete()
