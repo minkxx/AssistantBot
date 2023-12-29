@@ -31,11 +31,18 @@ async def spotify_downloader(client : asstb, message : Message):
         await y.edit_text("Converting to mp3...")
         send_path = MP4ToMP3(path)
         await y.delete()
+        z = await client.send_message(
+            chat_id = message.chat.id,
+            text = f"Sending song...",
+            reply_to_message_id = message.id
+        )
         await client.send_audio(
             chat_id = message.chat.id,
             audio = send_path,
         )
+        await z.delete()
         os.remove(send_path)
+
     elif ("album" in (url.split("/"))) and (sClient.validUrl(url)):
         albumName, albumSongs = sClient.getAlbum(url)
         dir_path =  f"songs/{albumName}/"
@@ -47,21 +54,19 @@ async def spotify_downloader(client : asstb, message : Message):
             )
             path = songDl(i, dir_path)
             await y.edit_text("Converting to mp3...")
-            MP4ToMP3(path)
-            await y.delete()
-        send_path = zip(albumName, dir_path)
-        z = await client.send_message(
-            chat_id = message.chat.id,
-            text = f"Sending zip file...",
-            reply_to_message_id = message.id
+            send_path = MP4ToMP3(path)
+            z = await client.send_message(
+                chat_id = message.chat.id,
+                text = f"Sending {i} to telegram..",
+                reply_to_message_id = message.id
+                )
+            await client.send_audio(
+                chat_id = message.chat.id,
+                audio = send_path,
             )
-        await client.send_document(
-            chat_id = message.chat.id,
-            document = send_path,
-        )
-        await z.delete()
+            await z.delete()
         os.remove(dir_path)
-        os.remove(send_path)
+
     elif ("playlist" in (url.split("/")))and (sClient.validUrl(url)):
         playlistName, playlistSongs = sClient.getPlaylist(url)
         dir_path =  f"songs/{playlistName}/"
@@ -73,21 +78,20 @@ async def spotify_downloader(client : asstb, message : Message):
             )
             path = songDl(j, dir_path)
             await y.edit_text("Converting to mp3...")
-            MP4ToMP3(path)
+            send_path = MP4ToMP3(path)
             await y.delete()
-        send_path = zip(playlistName, dir_path)
-        z = await client.send_message(
-            chat_id = message.chat.id,
-            text = f"Sending zip file...",
-            reply_to_message_id = message.id
+            z = await client.send_message(
+                chat_id = message.chat.id,
+                text = f"Sending {j} to telegram...",
+                reply_to_message_id = message.id
+                )
+            await client.send_audio(
+                chat_id = message.chat.id,
+                audio = send_path,
             )
-        await client.send_document(
-            chat_id = message.chat.id,
-            document = send_path,
-        )
-        await z.delete()
+            await z.delete()
         os.remove(dir_path)
-        os.remove(send_path)
+        
     else:
         await client.send_message(
             chat_id = message.chat.id,
