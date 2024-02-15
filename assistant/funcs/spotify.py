@@ -2,19 +2,24 @@ import re
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
+
 class spotiSearch:
-    def __init__(self, spotify_client_id:str, spotify_client_secret:str):
-        client_credentials_manager = (SpotifyClientCredentials(spotify_client_id, spotify_client_secret))
-        self.spotify = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+    def __init__(self, spotify_client_id: str, spotify_client_secret: str):
+        client_credentials_manager = SpotifyClientCredentials(
+            spotify_client_id, spotify_client_secret
+        )
+        self.spotify = spotipy.Spotify(
+            client_credentials_manager=client_credentials_manager
+        )
         self.regex = r"^(https:\/\/open.spotify.com\/)(.*)$"
 
-    def validUrl(self, url:str):
+    def validUrl(self, url: str):
         if re.search(self.regex, url):
             return True
         else:
             return False
 
-    def getTrack(self, url:str):
+    def getTrack(self, url: str):
         if ("track" in url.split("/")) and (self.validUrl(url)):
             track = self.spotify.track(url)
             info = track["name"]
@@ -25,8 +30,8 @@ class spotiSearch:
             return info
         else:
             return "Not a valid spotify track"
-        
-    def getAlbum(self, url:str):
+
+    def getAlbum(self, url: str):
         if ("album" in url.split("/")) and (self.validUrl(url)):
             album = self.spotify.album(url)
             albumName = album["name"]
@@ -41,8 +46,8 @@ class spotiSearch:
             return albumName, results
         else:
             return "Not a valid spotify track", "Not a valid spotify track"
-        
-    def getPlaylist(self, url:str):
+
+    def getPlaylist(self, url: str):
         if ("playlist" in url.split("/")) and (self.validUrl(url)):
             playlist = self.spotify.playlist(url)
             playlistName = playlist["name"]

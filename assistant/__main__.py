@@ -13,6 +13,7 @@ from assistant.modules import ALL_MODULES
 
 loop = asyncio.get_event_loop()
 
+
 async def start_bot():
     for module in ALL_MODULES:
         imported_module = importlib.import_module("assistant.modules." + module)
@@ -36,6 +37,7 @@ async def start_bot():
     await asstb.send_message(LOG_GROUP, "Bot started!")
     print("Sent!")
     await idle()
+
 
 if __name__ == "__main__":
     loop.run_until_complete(start_bot())
