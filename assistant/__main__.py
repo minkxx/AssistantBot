@@ -16,9 +16,8 @@ from assistant.core.keyboard import ikb
 from assistant.modules import ALL_MODULES
 from assistant.utils import paginate_modules
 from assistant.utils.constants import MARKDOWN
-
-# from assistant.utils.dbfunctions import get_rules
 from assistant.utils.functions import extract_text_and_keyb
+
 
 HELPABLE = {}
 
@@ -64,11 +63,11 @@ home_keyboard_pm = InlineKeyboardMarkup(
             InlineKeyboardButton(text="Commands ❓", callback_data="bot_commands"),
             InlineKeyboardButton(
                 text="Repo 🛠",
-                url="https://github.com/thehamkercat/WilliamButcherBot",
+                url="https://github.com/minkxx/AssistantBot",
             ),
         ],
         [
-            InlineKeyboardButton(text="Support 👨", url="http://t.me/WBBSupport"),
+            InlineKeyboardButton(text="Support 👨", url="http://t.me/BotsUnion"),
             InlineKeyboardButton(
                 text="Add Me To Your Group 🎉",
                 url=f"http://t.me/{BOT_USERNAME}?startgroup=new",
@@ -77,11 +76,7 @@ home_keyboard_pm = InlineKeyboardMarkup(
     ]
 )
 
-home_text_pm = (
-    f"Hey there! My name is {BOT_NAME}. I can manage your "
-    + "group with lots of useful features, feel free to "
-    + "add me to your group."
-)
+home_text_pm = (f"Hey there! My name is {BOT_NAME}. I am your personal assistatn bot with lost of useful plugins")
 
 keyboard = InlineKeyboardMarkup(
     [
@@ -92,11 +87,11 @@ keyboard = InlineKeyboardMarkup(
             ),
             InlineKeyboardButton(
                 text="Repo 🛠",
-                url="https://github.com/thehamkercat/WilliamButcherBot",
+                url="https://github.com/minkxx/AssistantBot",
             ),
         ],
         [
-            InlineKeyboardButton(text="Support 👨", url="t.me/WBBSupport"),
+            InlineKeyboardButton(text="Support 👨", url="t.me/BotsUnion"),
         ],
     ]
 )
@@ -127,12 +122,6 @@ async def start(_, message):
                 f"Here is the help for **{HELPABLE[module].__MODULE__}**:\n"
                 + HELPABLE[module].__HELP__
             )
-            # if module == "federation":
-            #     return await message.reply(
-            #         text=text,
-            #         reply_markup=FED_MARKUP,
-            #         disable_web_page_preview=True,
-            #     )
             await message.reply(
                 text,
                 reply_markup=InlineKeyboardMarkup(
@@ -230,12 +219,6 @@ async def commands_callbacc(_, CallbackQuery):
     await CallbackQuery.message.delete()
 
 
-# @asstb.on_callback_query(filters.regex("stats_callback"))
-# async def stats_callbacc(_, CallbackQuery):
-#     text = await bot_sys_stats()
-#     await asstb.answer_callback_query(CallbackQuery.id, text, show_alert=True)
-
-
 @asstb.on_callback_query(filters.regex(r"help_(.*?)"))
 async def help_button(client, query):
     home_match = re.match(r"help_home\((.+?)\)", query.data)
@@ -260,12 +243,6 @@ General command are:
             "{} **{}**:\n".format("Here is the help for", HELPABLE[module].__MODULE__)
             + HELPABLE[module].__HELP__
         )
-        # if module == "federation":
-        #     return await query.message.edit(
-        #         text=text,
-        #         reply_markup=FED_MARKUP,
-        #         disable_web_page_preview=True,
-        #     )
         await query.message.edit(
             text=text,
             reply_markup=InlineKeyboardMarkup(
