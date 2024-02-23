@@ -4,6 +4,7 @@ pyenv/
 env/
 downloads/
 songs/
+.vscode/
 
 # Ignoring extensions
 *.session

@@ -2,4 +2,5 @@ flask==3.0.2
 pyroaddon==1.0.6
 Pyrogram==2.0.106
 TgCrypto==1.2.5
-pykeyboard-0.1.5
+pykeyboard==0.1.5
+requests==2.31.0
