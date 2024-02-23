@@ -48,5 +48,3 @@ except PeerIdInvalid:
 
 # Some vars
 SUPPORT_CHAT = 1
-MUST_JOIN_CHANNEL = -1001800595118
-MUST_JOIN_CHANNEL_USERNAME = "MinkxxSays"

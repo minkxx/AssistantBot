@@ -47,7 +47,7 @@ async def start_bot():
     print("+===============================================================+")
     print("|                         ASSISTANT BOT                         |")
     print("+===============+===============+===============+===============+")
-    print("Loading modules...")
+    print("|                         Modules Loaded                        |")
     print(bot_modules)
     print("+===============+===============+===============+===============+")
     print(f"bot started as {BOT_NAME} for {OWNER_NAME}")
@@ -196,7 +196,7 @@ async def help_parser(name, keyboard=None):
         keyboard = InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "help"))
     return (
         """Hello {first_name}, My name is {bot_name}.
-I'm a group management bot with some useful features.
+I'm your personal assistant bot with some useful features.
 You can choose an option below, by clicking a button.
 Also you can ask anything in Support Group.
 """.format(
