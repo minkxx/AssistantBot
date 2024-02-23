@@ -8,7 +8,11 @@ from pyrogram import filters, __version__
 from pyrogram.types import Message
 
 from assistant import asstb, StartTime, OWNER_NAME, asst_version
-from assistant.funcs.helpers import get_readable_time
+from assistant.utils.helpers import get_readable_time
+
+__MODULE__ = "Alive"
+__HELP__ = """/alive - Check alive status
+/ping - Check ping."""
 
 
 @asstb.on_message(filters.command("alive"))

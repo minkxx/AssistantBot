@@ -13,6 +13,9 @@ from pyrogram.errors import (
     PasswordHashInvalid,
 )
 
+__MODULE__ = "Pyrogram Session Generator"
+__HELP__ = """/ssgen - generate string session."""
+
 
 async def cancel_in_msg(msg):
     if "/cancel" in msg.text:

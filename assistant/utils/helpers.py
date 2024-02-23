@@ -3,7 +3,6 @@ import time
 import os
 import shutil
 from datetime import datetime
-from moviepy.editor import *
 
 
 def get_readable_time(seconds: int) -> str:
@@ -29,15 +28,6 @@ def get_readable_time(seconds: int) -> str:
     ping_time += ":".join(time_list)
 
     return ping_time
-
-
-def MP4ToMP3(mp4_path: str):
-    mp3_path = mp4_path.split(".")[0] + ".mp3"
-    file = AudioFileClip(mp4_path)
-    file.write_audiofile(mp3_path)
-    file.close()
-    os.remove(mp4_path)
-    return mp3_path
 
 
 def zip(zip_name: str, dir_path: str):

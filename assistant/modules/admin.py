@@ -3,6 +3,26 @@ from pyrogram.types import Message, ChatPrivileges
 from pyrogram.enums import ChatMembersFilter
 from assistant import BOT_ID, asstb
 
+__MODULE__ = "Admin"
+__HELP__ = """/ban - Ban A User
+/unban - Unban A User
+/warn - Warn A User
+/rmwarns - Remove All Warning of A User
+/warns - Show Warning Of A User
+/kick - Kick A User
+/purge - Purge Messages
+/del - Delete Replied Message
+/promote - Promote A Member
+/fullpromote - Promote A Member With All Rights
+/demote - Demote A Member
+/pin - Pin A Message
+/mute - Mute A User
+/tmute - Mute A User For Specific Time
+/unmute - Unmute A User
+/ban_ghosts - Ban Deleted Accounts
+/report | @admins | @admin - Report A Message To Admins.
+/invite - Send Group/SuperGroup Invite Link."""
+
 
 async def get_admins(chat_id: int, *args, **kwargs):
     admin_list = []

@@ -1,6 +1,7 @@
 # Ignoring files
 __pycache__/
 pyenv/
+env/
 downloads/
 songs/
 

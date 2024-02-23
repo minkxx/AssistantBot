@@ -5,6 +5,10 @@ from pyrogram.types import Message
 
 from assistant import asstb
 
+__MODULE__ = "Whois"
+__HELP__ = """/whois - get user info
+/id - get user id"""
+
 
 @asstb.on_message(filters.command("whois"))
 async def whois_cmd(c: asstb, m: Message):
