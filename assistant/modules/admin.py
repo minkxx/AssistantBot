@@ -4,25 +4,20 @@ from pyrogram.enums import ChatMembersFilter
 from assistant import BOT_ID, asstb
 
 __MODULE__ = "Admin"
-__HELP__ = """/ban - Ban A User
-/unban - Unban A User
-/warn - Warn A User
-/rmwarns - Remove All Warning of A User
-/warns - Show Warning Of A User
-/kick - Kick A User
-/purge - Purge Messages
-/del - Delete Replied Message
-/promote - Promote A Member
-/fullpromote - Promote A Member With All Rights
+__HELP__ = """/promote - Promote A Member
 /demote - Demote A Member
 /pin - Pin A Message
-/mute - Mute A User
-/tmute - Mute A User For Specific Time
-/unmute - Unmute A User
-/ban_ghosts - Ban Deleted Accounts
-/report | @admins | @admin - Report A Message To Admins.
 /invite - Send Group/SuperGroup Invite Link."""
 
+# /ban - Ban A User
+# /unban - Unban A User
+# /warn - Warn A User
+# /rmwarns - Remove All Warning of A User
+# /warns - Show Warning Of A User
+# /kick - Kick A User
+# /purge - Purge Messages
+# /del - Delete Replied Message
+# /fullpromote - Promote A Member With All Rights
 
 async def get_admins(chat_id: int, *args, **kwargs):
     admin_list = []
@@ -100,3 +95,66 @@ async def promotehammer(c: asstb, m: Message):
 
 
 # demote
+@asstb.on_message(filters.command("demote") & filters.group)
+async def promotehammer(c: asstb, m: Message):
+    cmd = m.command
+    admins = await get_admins(m.chat.id)
+    bot = (await c.get_chat_member(m.chat.id, BOT_ID)).privileges
+    if not BOT_ID in admins:
+        await c.send_message(
+            chat_id=m.chat.id, text="I'm not an admin here!", reply_to_message_id=m.id
+        )
+        return
+    elif not bot.can_promote_members:
+        await c.send_message(
+            chat_id=m.chat.id,
+            text="Promote me with add admin privileges!",
+            reply_to_message_id=m.id,
+        )
+        return
+    else:
+        if not m.from_user.id in admins:
+            await c.send_message(
+                chat_id=m.chat.id,
+                text="You aren't the boss here",
+                reply_to_message_id=m.id,
+            )
+            return
+        elif not m.reply_to_message and len(cmd) == 1:
+            await c.send_message(
+                chat_id=m.chat.id,
+                text="I cant't demote no one\nCan I?",
+                reply_to_message_id=m.id,
+            )
+            return
+        else:
+            if len(cmd) == 1:
+                get_user = m.reply_to_message.from_user.id
+            elif len(cmd) > 1:
+                get_user = cmd[1]
+
+            if get_user not in admins:
+                await c.send_message(
+                    chat_id=m.chat.id,
+                    text="How can I demote someone who is not admin here?",
+                    reply_to_message_id=m.id,
+                )
+                return
+
+            await c.promote_chat_member(
+                chat_id=m.chat.id,
+                user_id=get_user,
+                privileges=ChatPrivileges(
+                    can_change_info=False,
+                    can_invite_users=False,
+                    can_delete_messages=False,
+                    can_restrict_members=False,
+                    can_pin_messages=False,
+                    can_promote_members=False,
+                    can_manage_chat=False,
+                    can_manage_video_chats=False,
+                ),
+            )
+            await c.send_message(
+                chat_id=m.chat.id, text=f"Demoted!", reply_to_message_id=m.id
+            )
