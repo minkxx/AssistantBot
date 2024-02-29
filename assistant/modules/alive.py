@@ -10,12 +10,16 @@ from pyrogram.types import Message
 from assistant import asstb, StartTime, OWNER_NAME, asst_version
 from assistant.utils.helpers import get_readable_time
 
+from assistant.core.decorators.permissions import owner_only
+
+
 __MODULE__ = "Alive"
 __HELP__ = """/alive - Check alive status
 /ping - Check ping."""
 
 
 @asstb.on_message(filters.command("alive"))
+@owner_only
 async def alive_cmd(client: asstb, message: Message):
     img_ = "https://graph.org/file/6d37af28a21b094079ff5.jpg"
     my_system = platform.uname()
@@ -39,6 +43,7 @@ async def alive_cmd(client: asstb, message: Message):
 
 
 @asstb.on_message(filters.command("ping"))
+@owner_only
 async def pingme(client: asstb, message: Message):
     start = datetime.now()
     x = await client.send_message(

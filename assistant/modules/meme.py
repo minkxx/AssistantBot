@@ -5,8 +5,8 @@ from pyrogram.types import Message
 from assistant import asstb
 
 __MODULE__ = "Meme"
-__HELP__ = """`/meme` - get random reddit meme
-`/meme (subreddit)` -  get random meme from the subreddit."""
+__HELP__ = """/meme - get random reddit meme
+/meme (subreddit) -  get random meme from the subreddit."""
 
 
 @asstb.on_message(filters.command("meme"))
