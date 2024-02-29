@@ -1,13 +1,15 @@
 from pyrogram import filters
 from pyrogram.types import Message, ChatPrivileges
 from pyrogram.enums import ChatMembersFilter
+
 from assistant import BOT_ID, asstb
+from assistant.core.decorators.permissions import owner_only
 
 __MODULE__ = "Admin"
 __HELP__ = """/promote - Promote A Member
 /demote - Demote A Member
 /pin - Pin A Message
-/invite - Send Group/SuperGroup Invite Link."""
+/invitelink - Send Group/SuperGroup Invite Link."""
 
 # /ban - Ban A User
 # /unban - Unban A User
@@ -30,6 +32,7 @@ async def get_admins(chat_id: int, *args, **kwargs):
 
 # Promote
 @asstb.on_message(filters.command("promote") & filters.group)
+@owner_only
 async def promotehammer(c: asstb, m: Message):
     cmd = m.command
     admins = await get_admins(m.chat.id)
@@ -96,7 +99,8 @@ async def promotehammer(c: asstb, m: Message):
 
 # demote
 @asstb.on_message(filters.command("demote") & filters.group)
-async def promotehammer(c: asstb, m: Message):
+@owner_only
+async def demotehammer(c: asstb, m: Message):
     cmd = m.command
     admins = await get_admins(m.chat.id)
     bot = (await c.get_chat_member(m.chat.id, BOT_ID)).privileges
@@ -157,4 +161,39 @@ async def promotehammer(c: asstb, m: Message):
             )
             await c.send_message(
                 chat_id=m.chat.id, text=f"Demoted!", reply_to_message_id=m.id
+            )
+
+# pin
+@asstb.on_message(filters.command("pin") & filters.group)
+@owner_only
+async def pinhammer(c: asstb, m: Message):
+    if not m.reply_to_message:
+        await c.send_message(
+                chat_id=m.chat.id, text=f"What am I supposed to pin? Jesus?", reply_to_message_id=m.id
+            )
+    else:
+        await c.pin_chat_message(
+            chat_id=m.chat.id,
+            message_id=m.reply_to_message.id
+            )
+
+        await m.reply_text("__pinned__ !")
+
+# invite liink
+@asstb.on_message(filters.command("invitelink") & filters.group)
+@owner_only
+async def invitehammer(c: asstb, m: Message):
+    link = await c.export_chat_invite_link(m.chat.id)
+    if link:
+        await c.send_message(
+                    chat_id=m.chat.id,
+                    text=f"**Here's the invite link of this chat..**\n\n`{link}`",
+                    reply_to_message_id=m.id,
+                    disable_web_page_preview=True,
+                )
+    else:
+        await c.send_message(
+                chat_id=m.chat.id,
+                text=f"Unable to get chat invite link!!",
+                reply_to_message_id=m.id
             )
