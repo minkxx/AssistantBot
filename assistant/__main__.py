@@ -76,7 +76,7 @@ home_keyboard_pm = InlineKeyboardMarkup(
     ]
 )
 
-home_text_pm = (f"Hey there! My name is {BOT_NAME}. I am your personal assistatn bot with lost of useful plugins")
+home_text_pm = f"Hey there! My name is {BOT_NAME}. I am your personal assistatn bot with lost of useful plugins"
 
 keyboard = InlineKeyboardMarkup(
     [

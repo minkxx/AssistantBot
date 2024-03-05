@@ -21,7 +21,9 @@ async def alive_cmd(c: asstb, m: Message):
             post_url = data["url"]
             is_nsfw = data["nsfw"]
             ups_count = data["ups"]
-            text = f"Title : {title}\nSubreddit : `r/{subreddit}`\nUp Votes : {ups_count}"
+            text = (
+                f"Title : {title}\nSubreddit : `r/{subreddit}`\nUp Votes : {ups_count}"
+            )
             if post_url.split(".")[-1] == "png" or post_url.split(".")[-1] == "jpg":
                 await c.send_photo(
                     chat_id=m.chat.id,
@@ -48,9 +50,9 @@ async def alive_cmd(c: asstb, m: Message):
                 )
         except Exception as e:
             await c.send_message(
-                    chat_id=m.chat.id,
-                    text=f"Error : {e}",
-                )
+                chat_id=m.chat.id,
+                text=f"Error : {e}",
+            )
     elif len(m.command) == 2:
         try:
             url = f"https://meme-api.com/gimme/{m.command[1]}"
@@ -61,7 +63,9 @@ async def alive_cmd(c: asstb, m: Message):
             post_url = data["url"]
             is_nsfw = data["nsfw"]
             ups_count = data["ups"]
-            text = f"Title : {title}\nSubreddit : `r/{subreddit}`\nUp Votes : {ups_count}"
+            text = (
+                f"Title : {title}\nSubreddit : `r/{subreddit}`\nUp Votes : {ups_count}"
+            )
             if post_url.split(".")[-1] == "png" or post_url.split(".")[-1] == "jpg":
                 await c.send_photo(
                     chat_id=m.chat.id,
@@ -88,6 +92,6 @@ async def alive_cmd(c: asstb, m: Message):
                 )
         except Exception as e:
             await c.send_message(
-                    chat_id=m.chat.id,
-                    text=f"Error : {e}",
-                )
+                chat_id=m.chat.id,
+                text=f"Error : {e}",
+            )
