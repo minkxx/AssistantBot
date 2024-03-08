@@ -12,3 +12,7 @@ OWNER_ID = int(os.environ.get("OWNER_ID", 1))
 
 # Add t.me/MissRose_bot to your log group and type /id to get groupid
 LOG_GROUP = int(os.environ.get("LOG_GROUP", 1))
+
+# Get it from rapid api
+X_RAPIDAPI_KEY = os.environ.get("X_RAPIDAPI_KEY", None)
+X_RAPIDAPI_HOST = os.environ.get("X_RAPIDAPI_HOST", None)
